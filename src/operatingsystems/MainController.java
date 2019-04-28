@@ -6,9 +6,12 @@
 package operatingsystems;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,14 +38,17 @@ public class MainController implements Initializable {
     private TextField timeQuantum;
     @FXML
     private Label generateLabel;
+    @FXML
+    private JFXComboBox selectAlgo;
     
-
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        ObservableList<String> options = FXCollections.observableArrayList("FCFS","RR");
+        selectAlgo.getItems().addAll(options);
     }    
 
     @FXML
@@ -92,12 +98,23 @@ public class MainController implements Initializable {
     }
     
     @FXML
-    private void simulateFCFS() throws IOException{
+    private void simulateData() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("procList.fxml"));
         loader.load();
         ProcListController cont = loader.getController();
-        Scheduler.FCFS();
+        String option = selectAlgo.getValue().toString();
+        if(option == "FCFS")
+        {
+            System.out.println("Initiating First come first server!");
+            Scheduler.FCFS();  
+        }
+        else if(option == "RR")
+        {
+            System.out.println("Initiating Round Robin!");
+            Scheduler.RR();
+        }
         cont.refreshTable();
     }
+    
     
 }

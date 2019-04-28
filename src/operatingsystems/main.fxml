@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
@@ -45,12 +46,26 @@
       </Group>
       <AnchorPane layoutY="82.0" prefHeight="418.0" prefWidth="700.0">
          <children>
-            <Pane layoutX="372.0" prefHeight="418.0" prefWidth="327.0">
+            <Pane layoutX="372.0" prefHeight="418.0" prefWidth="327.0" stylesheets="@mainView.css">
                <children>
-                  <VBox layoutY="27.0" prefHeight="254.0" prefWidth="327.0" />
+                  <VBox alignment="CENTER" layoutX="18.0" layoutY="24.0" prefHeight="254.0" prefWidth="292.0" spacing="20.0" style="-fx-background-color: transparent;">
+                     <children>
+                        <JFXComboBox fx:id="selectAlgo" focusColor="#e63946" labelFloat="true" prefHeight="26.0" prefWidth="306.0" promptText="Select algorithm!" unFocusColor="BLACK" />
+                        <JFXButton maxWidth="130.0" minWidth="130.0" onAction="#simulateData" style="-fx-background-color: #E63946;" text="Simulate" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding></VBox>
                </children>
+               <effect>
+                  <DropShadow height="10.0" offsetY="3.5" radius="4.5" width="10.0" />
+               </effect>
             </Pane>
-            <Pane layoutX="33.0" layoutY="14.0" prefHeight="218.0" prefWidth="279.0">
+            <Pane layoutX="33.0" layoutY="14.0" prefHeight="218.0" prefWidth="279.0" style="-fx-background-color: transparent;">
                <children>
                   <VBox alignment="CENTER" layoutY="8.0" prefHeight="200.0" prefWidth="279.0">
                      <children>
@@ -93,11 +108,6 @@
                   <DropShadow height="10.0" offsetY="3.5" radius="4.5" width="10.0" />
                </effect>
             </Pane>
-            <JFXButton layoutX="278.0" layoutY="257.0" maxWidth="130.0" minWidth="130.0" onAction="#simulateFCFS" style="-fx-background-color: #E63946;" text="FCFS" textFill="WHITE">
-               <font>
-                  <Font name="SansSerif Regular" size="13.0" />
-               </font>
-            </JFXButton>
             <Label fx:id="generateLabel" layoutX="38.0" layoutY="71.0" textFill="WHITE" />
          </children>
       </AnchorPane>

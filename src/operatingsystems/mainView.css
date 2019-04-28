@@ -1,0 +1,13 @@
+.jfx-combo-box {
+    -fx-test-fill:white;
+    -fx-prompt-text-fill: white;
+}
+.jfx-combo-box .list-cell{
+    -fx-text-fill: black;
+}
+.jfx-combo-box .list-cell:filled:selected .text{
+    -fx-fill: white;
+}
+.jfx-combo-box .arrow {
+    -fx-background-color: white;
+}
