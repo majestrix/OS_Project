@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #1D3557; -fx-border-width: 10px;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="operatingsystems.MainController">
+   <children>
+      <Group>
+         <children>
+            <Pane prefHeight="82.0" prefWidth="700.0" style="-fx-background-color: #457B9D; -fx-border-width: 3px; -fx-border-color: #000000;">
+               <children>
+                  <AnchorPane layoutX="666.0" layoutY="10.0" prefHeight="0.0" prefWidth="20.0" style="-fx-background-color: #E63946;">
+                     <children>
+                        <JFXButton onAction="#ExitApp" text="X" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+               </children>
+               <effect>
+                  <Reflection fraction="0.38" topOffset="-2.0" topOpacity="0.35" />
+               </effect>
+            </Pane>
+            <Label contentDisplay="CENTER" layoutX="103.0" layoutY="16.0" text="CPU Scheduling Simulator" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Bold" size="39.0" />
+               </font>
+               <effect>
+                  <DropShadow height="20.0" offsetY="2.0" radius="9.5" spread="0.22" width="20.0" />
+               </effect>
+            </Label>
+         </children>
+      </Group>
+      <AnchorPane layoutY="82.0" prefHeight="418.0" prefWidth="700.0">
+         <children>
+            <Pane layoutX="372.0" prefHeight="418.0" prefWidth="327.0">
+               <children>
+                  <VBox layoutY="27.0" prefHeight="254.0" prefWidth="327.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="33.0" layoutY="14.0" prefHeight="218.0" prefWidth="279.0">
+               <children>
+                  <VBox alignment="CENTER" layoutY="8.0" prefHeight="200.0" prefWidth="279.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="230.0" text="Proccess Generator:" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold" size="21.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="procNum" promptText="Enter number of proccesses here">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="timeQuantum" promptText="Time Quantum (Instructions per burst)">
+                           <VBox.margin>
+                              <Insets top="15.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <HBox alignment="CENTER" prefHeight="26.0" prefWidth="160.0" spacing="10.0">
+                           <children>
+                              <JFXButton maxWidth="130.0" minWidth="130.0" onAction="#Generate" style="-fx-background-color: #E63946;" text="Generate" textFill="WHITE">
+                                 <font>
+                                    <Font name="SansSerif Regular" size="13.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton maxWidth="130.0" minWidth="120.0" onAction="#ShowProcs" style="-fx-background-color: #E63946;" text="Show Proccesses" textFill="WHITE">
+                                 <font>
+                                    <Font name="SansSerif Regular" size="13.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                           <padding>
+                              <Insets top="25.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <effect>
+                  <DropShadow height="10.0" offsetY="3.5" radius="4.5" width="10.0" />
+               </effect>
+            </Pane>
+            <JFXButton layoutX="278.0" layoutY="257.0" maxWidth="130.0" minWidth="130.0" onAction="#simulateFCFS" style="-fx-background-color: #E63946;" text="FCFS" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Regular" size="13.0" />
+               </font>
+            </JFXButton>
+            <Label fx:id="generateLabel" layoutX="38.0" layoutY="71.0" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
