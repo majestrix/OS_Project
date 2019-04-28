@@ -8,5 +8,5 @@ FCFS | ✅
 PRIORITY | ❌
 SJF | ❌
 SRTF | ❌
-RR | ❌
+RR | ✅
 Proper GUI | ❌
