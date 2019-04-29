@@ -47,7 +47,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ObservableList<String> options = FXCollections.observableArrayList("FCFS","RR");
+        ObservableList<String> options = FXCollections.observableArrayList("FCFS","RR","Priority(N)");
         selectAlgo.getItems().addAll(options);
     }    
 
@@ -103,15 +103,20 @@ public class MainController implements Initializable {
         loader.load();
         ProcListController cont = loader.getController();
         String option = selectAlgo.getValue().toString();
-        if(option == "FCFS")
+        switch(option)
         {
-            System.out.println("Initiating First come first server!");
-            Scheduler.FCFS();  
-        }
-        else if(option == "RR")
-        {
-            System.out.println("Initiating Round Robin!");
-            Scheduler.RR();
+            case "FCFS":
+                System.out.println("Initiating First come first server!");
+                Scheduler.FCFS();
+                break;
+            case "RR":
+                System.out.println("Initiating Round Robin!");
+                Scheduler.RR();
+                break;
+            case "Priority(N)":
+                System.out.println("Initiating Round Robin!");
+                //Scheduler.NonPPriority();
+                break;
         }
         cont.refreshTable();
     }

@@ -6,6 +6,8 @@
 package operatingsystems;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 /**
@@ -17,6 +19,7 @@ public class Scheduler {
     public static ArrayList<Process> Processes = new ArrayList<Process>();
     public static ArrayList<Process> readyQueue;
     public static ArrayList<Process>  waitQueue;
+    public static ArrayList<Process>  newQueue;
     public static int timeQuantum;
     private static int MP = 10;
     
@@ -35,91 +38,21 @@ public class Scheduler {
             return false;
     }
     
-//    public boolean processFinished(){
-//        if( this.currentlyRunning != null) {
-//            return this.currentlyRunning.getRemainingTime() == 0;
-//         }
-//        return false;
-//    }
-
-//    public static void FCFS() {
-//		int time = 0; // current time
-//		readyQueue = new ArrayList<Process>();
-//                waitQueue = new ArrayList<Process>();
-//                Process currentlyRunning = null;
-//		while (processesRunning()) // while there are still unfinished processes
-//                {
-////                        for(Process p: Processes)
-////                            System.out.print("P"+p.getPid()+"-"+p.getFinishTime()+"|");
-////                        System.out.println();
-//
-//			for (Process p : Processes)
-//                            if (p.getArrivalTime() == time)
-//                                    readyQueue.add(p);
-//                        
-//                        if (currentlyRunning == null && !readyQueue.isEmpty()) //if no process has started
-//                        {
-//                            currentlyRunning = readyQueue.remove(0); //pop the process from readyQ
-//                            if (currentlyRunning != null) //check if we actually got a process and start it
-//                                    currentlyRunning.setTableStartTime(time);
-//			}
-//                        
-//                        if(currentlyRunning != null && currentlyRunning.getRemainingTimeCPU() == currentlyRunning.getReqIO() && currentlyRunning.getReqIO() >= 0 && currentlyRunning.getRemainingTimeIO() > 0)
-//                        {
-//                            waitQueue.add(currentlyRunning);    //Check if process requesting IO
-//                            currentlyRunning = null;            //Before going for another CPU burst
-//
-//                        }
-//                        
-//                        if(!waitQueue.isEmpty())
-//                        {
-//                            Iterator<Process> iter = waitQueue.iterator();
-//                            
-//                            while(iter.hasNext() && currentlyRunning != null)
-//                            {
-//                                Process p = iter.next();
-//                                p.decIO();
-//                                if(p.getRemainingTimeIO() <= 0)
-//                                {
-//                                    readyQueue.add(p);
-//                                    iter.remove();
-//                                }
-//                            }
-//                        }
-//			
-//
-//			if (currentlyRunning != null) //Work calculations here!
-//                        {
-//                            currentlyRunning.decCPU(); //Decrement CPU Remanining time
-//                            if(currentlyRunning.getRemainingTimeCPU() == 0)//Process Finished!
-//                            {
-//                                System.out.print("| P("+currentlyRunning.getPid()+") | ");
-//                                currentlyRunning.setFinishTime(time);
-//                                currentlyRunning.refreshTableItems();
-//                                int startTime = Integer.parseInt(currentlyRunning.getTableStartTime().split(",")[1]);
-//                                currentlyRunning.setTurnAround(currentlyRunning.getFinishTime() - startTime);
-//
-//                                currentlyRunning.setWaitingTime(currentlyRunning.getTurnAround() - currentlyRunning.getCpuBurst()); 
-//                                currentlyRunning = null;
-//                                
-//                            }
-//                            //Reschedule if process finished/sent to waitQ
-//                            if (currentlyRunning == null && !readyQueue.isEmpty())
-//                            {
-//                              currentlyRunning = readyQueue.remove(0);
-//                                if (currentlyRunning != null)
-//                                    currentlyRunning.setStartTime(time);  
-//                            }
-//                                    
-//			}
-//
-//			//addToGanttChart(ganttChart, currentlyRunning); // add currently running process at the current moment t													// Gantt Chart
-//			time++; // increment time
-//		}
-//		//return ganttChart;
-//	}
+    
+    
+    public static void insertSorted(Process p,ArrayList<Process> arr){
+        int pos = Collections.binarySearch(arr,p,new Comparator<Process>(){
+            public int compare(Process one,Process two){
+                return one.getPriority() - two.getPriority();
+            }
+        });
+        if (pos < 0) {
+            arr.add(-pos-1, p);
+        }
+    } 
     public static void FCFS(){
         int time = 0;
+        newQueue = new ArrayList<Process>();
         readyQueue = new ArrayList<Process>();
         waitQueue = new ArrayList<Process>();
         Process curRunning = null;
@@ -127,10 +60,19 @@ public class Scheduler {
         while(processesRunning()){
         
             for (Process p : Processes)
-                if (p.getArrivalTime() == time && readyQueue.size() < MP)
+                if (p.getArrivalTime() == time)
                 {
-                    readyQueue.add(p);
+                    if( readyQueue.size() < MP)
+                        readyQueue.add(p);
+                    else
+                        if(!newQueue.contains(p))
+                            newQueue.add(p);
                 } //Keep checking if we can add
+            
+            while(readyQueue.size() < MP && !newQueue.isEmpty())
+            {
+                readyQueue.add(newQueue.remove(0));
+            }
             
             if(!waitQueue.isEmpty())
             {
@@ -189,15 +131,26 @@ public class Scheduler {
             int time = 0;
         readyQueue = new ArrayList<Process>();
         waitQueue = new ArrayList<Process>();
+        newQueue = new ArrayList<Process>();
+        
         Process curRunning = null;
         
         while(processesRunning()){
         
             for (Process p : Processes)
-                if (p.getArrivalTime() == time && readyQueue.size() < MP)
+                if (p.getArrivalTime() == time)
                 {
-                    readyQueue.add(p);
+                    if( readyQueue.size() < MP)
+                        readyQueue.add(p);
+                    else
+                        if(!newQueue.contains(p))
+                            newQueue.add(p);
                 } //Keep checking if we can add
+            
+            while(readyQueue.size() < MP && !newQueue.isEmpty())
+            {
+                readyQueue.add(newQueue.remove(0));
+            }
             
             if(!waitQueue.isEmpty())
             {
@@ -255,4 +208,7 @@ public class Scheduler {
             time++;
         }
     }
+    
+
+    
 }
