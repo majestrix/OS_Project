@@ -45,6 +45,8 @@ public class ProcListController implements Initializable {
     @FXML
     private TableColumn<Process,Integer> ARRIVAL;
     @FXML
+    private TableColumn<Process,Integer> PRIORITY;
+    @FXML
     private TableColumn<Process,Integer> START;
     @FXML
     private TableColumn<Process,Integer> END;
@@ -91,6 +93,7 @@ public class ProcListController implements Initializable {
 //        
         PID.setCellValueFactory(new PropertyValueFactory<Process,Integer>("tablePid"));
         ARRIVAL.setCellValueFactory(new PropertyValueFactory<Process,Integer>("tableArrivalTime"));
+        PRIORITY.setCellValueFactory(new PropertyValueFactory<Process,Integer>("tablePriority"));
         START.setCellValueFactory(new PropertyValueFactory<Process,Integer>("tableStartTime"));
         END.setCellValueFactory(new PropertyValueFactory<Process,Integer>("tableEndTime"));
         TA.setCellValueFactory(new PropertyValueFactory<Process,Integer>("tableTurnAround"));

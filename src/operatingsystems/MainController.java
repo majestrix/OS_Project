@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Pair;
 
 /**
  * FXML Controller class
@@ -40,14 +41,17 @@ public class MainController implements Initializable {
     private Label generateLabel;
     @FXML
     private JFXComboBox selectAlgo;
-    
+    @FXML
+    private JFXButton simButton;
+    @FXML
+    private Label fFCFS,wFCFS,fRR,wRR,fPP,wPP,fPN,wPN;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ObservableList<String> options = FXCollections.observableArrayList("FCFS","RR","Priority(N)");
+        ObservableList<String> options = FXCollections.observableArrayList("FCFS","RR","Priority(N)","Priority(P)");
         selectAlgo.getItems().addAll(options);
     }    
 
@@ -55,7 +59,6 @@ public class MainController implements Initializable {
     private void Generate(ActionEvent event) {
         int procNumINT;
         int timeQuantumINT;
-        Scheduler.clear();
         try
         {
             if( procNum.getText() != null && timeQuantum.getText() != null)
@@ -99,10 +102,28 @@ public class MainController implements Initializable {
     
     @FXML
     private void simulateData() throws IOException{
+        String option;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("procList.fxml"));
         loader.load();
         ProcListController cont = loader.getController();
-        String option = selectAlgo.getValue().toString();
+        simButton.setText("Simulate");
+        try{
+          option = selectAlgo.getValue().toString();  
+        }catch(NullPointerException e)
+        {
+            option = "";
+        }
+        
+        //Find Averages
+        Scheduler.FCFS();
+        this.wFCFS.setText(Scheduler.calcAverageWait() + "");
+        Scheduler.RR();
+        this.wRR.setText(Scheduler.calcAverageWait() + "");
+        Scheduler.PN();
+        this.wPN.setText(Scheduler.calcAverageWait() + "");
+        Scheduler.PP();
+        this.wPP.setText(Scheduler.calcAverageWait() + "");
+        
         switch(option)
         {
             case "FCFS":
@@ -114,8 +135,14 @@ public class MainController implements Initializable {
                 Scheduler.RR();
                 break;
             case "Priority(N)":
-                System.out.println("Initiating Round Robin!");
-                //Scheduler.NonPPriority();
+                System.out.println("Initiating Non-preemptive Priority!!");
+                Scheduler.PN();
+                break;
+            case "Priority(P)":
+                System.out.println("Initiating Pre-emptive Priority!");
+                Scheduler.PP();
+            default:
+                simButton.setText("Select first!");
                 break;
         }
         cont.refreshTable();

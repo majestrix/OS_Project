@@ -46,28 +46,9 @@
       </Group>
       <AnchorPane layoutY="82.0" prefHeight="418.0" prefWidth="700.0">
          <children>
-            <Pane layoutX="372.0" prefHeight="418.0" prefWidth="327.0" stylesheets="@mainView.css">
+            <Pane layoutX="-1.0" layoutY="-2.0" prefHeight="418.0" prefWidth="350.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="-1.0">
                <children>
-                  <VBox alignment="CENTER" layoutX="18.0" layoutY="24.0" prefHeight="254.0" prefWidth="292.0" spacing="20.0" style="-fx-background-color: transparent;">
-                     <children>
-                        <JFXComboBox fx:id="selectAlgo" focusColor="#e63946" labelFloat="true" prefHeight="26.0" prefWidth="306.0" promptText="Select algorithm!" unFocusColor="BLACK" />
-                        <JFXButton maxWidth="130.0" minWidth="130.0" onAction="#simulateData" style="-fx-background-color: #E63946;" text="Simulate" textFill="WHITE">
-                           <font>
-                              <Font name="SansSerif Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                     </children>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding></VBox>
-               </children>
-               <effect>
-                  <DropShadow height="10.0" offsetY="3.5" radius="4.5" width="10.0" />
-               </effect>
-            </Pane>
-            <Pane layoutX="33.0" layoutY="14.0" prefHeight="218.0" prefWidth="279.0" style="-fx-background-color: transparent;">
-               <children>
-                  <VBox alignment="CENTER" layoutY="8.0" prefHeight="200.0" prefWidth="279.0">
+                  <VBox alignment="CENTER" layoutX="1.0" layoutY="35.0" prefHeight="200.0" prefWidth="279.0">
                      <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="230.0" text="Proccess Generator:" textAlignment="CENTER" textFill="WHITE">
                            <font>
@@ -103,13 +84,69 @@
                         </HBox>
                      </children>
                   </VBox>
+                  <VBox alignment="TOP_CENTER" layoutX="-6.0" layoutY="252.0" prefHeight="111.0" prefWidth="292.0" spacing="20.0" style="-fx-background-color: transparent;" stylesheets="@mainView.css">
+                     <children>
+                        <JFXComboBox fx:id="selectAlgo" focusColor="#e63946" labelFloat="true" prefHeight="26.0" prefWidth="306.0" promptText="Select algorithm!" unFocusColor="BLACK" />
+                        <JFXButton fx:id="simButton" maxWidth="130.0" minWidth="130.0" onAction="#simulateData" style="-fx-background-color: #E63946;" text="Simulate" textFill="WHITE">
+                           <font>
+                              <Font name="SansSerif Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding></VBox>
                </children>
                <effect>
                   <DropShadow height="10.0" offsetY="3.5" radius="4.5" width="10.0" />
                </effect>
             </Pane>
-            <Label fx:id="generateLabel" layoutX="38.0" layoutY="71.0" textFill="WHITE" />
+            <Group layoutX="60.0">
+               <children>
+                  <Pane layoutX="312.0" prefHeight="418.0" prefWidth="327.0">
+                     <children>
+                        <Group layoutX="55.0" layoutY="104.0">
+                           <children>
+                              <VBox prefHeight="82.0" prefWidth="78.0">
+                                 <children>
+                                    <Label text="FCFS" textFill="WHITE" />
+                                    <Label text="RR" textFill="WHITE" />
+                                    <Label text="Priority(N)" textFill="WHITE" />
+                                    <Label text="Priority(P)" textFill="WHITE" />
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="70.0" prefHeight="82.0" prefWidth="78.0">
+                                 <children>
+                                    <Label fx:id="fFCFS" textFill="WHITE" />
+                                    <Label fx:id="fRR" textFill="WHITE" />
+                                    <Label fx:id="fPN" textFill="WHITE" />
+                                    <Label fx:id="fPP" textFill="WHITE" />
+                                 </children>
+                              </VBox>
+                              <Label layoutX="70.0" layoutY="-20.0" text="FINISH" textFill="WHITE" />
+                              <VBox layoutX="140.0" prefHeight="82.0" prefWidth="78.0">
+                                 <children>
+                                    <Label fx:id="wFCFS" textFill="WHITE" />
+                                    <Label fx:id="wRR" textFill="WHITE" />
+                                    <Label fx:id="wPN" textFill="WHITE" />
+                                    <Label fx:id="wPP" textFill="WHITE" />
+                                 </children>
+                              </VBox>
+                              <Label layoutX="140.0" layoutY="-20.0" text="WAIT" textFill="WHITE" />
+                           </children>
+                        </Group>
+                     </children>
+                     <effect>
+                        <DropShadow height="10.0" offsetY="3.5" radius="4.5" width="10.0" />
+                     </effect>
+                  </Pane>
+                  <Label fx:id="generateLabel" layoutY="85.0" textFill="WHITE" />
+               </children>
+            </Group>
          </children>
+         <padding>
+            <Insets bottom="20.0" left="50.0" right="50.0" />
+         </padding>
       </AnchorPane>
    </children>
 </AnchorPane>

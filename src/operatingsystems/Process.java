@@ -29,7 +29,7 @@ public class Process extends RecursiveTreeObject<Process> {
     private int totalInstructions;
     private int cpuInstrct;
     private int ioInstrct;
-    private SimpleIntegerProperty tablePid,tableArrivalTime,tableStartTime,tableEndTime,tableTurnAround,
+    private SimpleIntegerProperty tablePid,tableArrivalTime,tablePriority,tableStartTime,tableEndTime,tableTurnAround,
             tableReqIo,tableIoBurst,tableCpuBurst,tableWait;
 
     
@@ -67,6 +67,7 @@ public class Process extends RecursiveTreeObject<Process> {
                 //TableView Items
                 this.tablePid = new SimpleIntegerProperty(this.pid);
                 this.tableArrivalTime = new SimpleIntegerProperty(this.arrivalTime);
+                this.tablePriority = new SimpleIntegerProperty(this.priority);
                 this.tableStartTime = new SimpleIntegerProperty(this.startTime);
                 this.tableEndTime = new SimpleIntegerProperty(this.finishTime);
                 this.tableReqIo = new SimpleIntegerProperty(this.reqIO);
@@ -75,6 +76,14 @@ public class Process extends RecursiveTreeObject<Process> {
                 this.tableTurnAround = new SimpleIntegerProperty(this.turnAround);
                 this.tableWait = new SimpleIntegerProperty(this.waitingTime);
                 
+    }
+    
+    public void resetProcess(){
+        this.startTime = -1;
+        this.finishTime = -1;
+        this.turnAround = -1;
+        this.remainingTimeCPU = this.cpuBurst;
+        this.remainingTimeIO = this.ioBurst;
     }
     
     public void refreshTableItems(){
@@ -248,6 +257,14 @@ public class Process extends RecursiveTreeObject<Process> {
         this.tableArrivalTime = tableArrivalTime;
     }
 
+    public int getTablePriority() {
+        return tablePriority.get();
+    }
+
+    public void setTablePriority(SimpleIntegerProperty tablePriority) {
+        this.tablePriority = tablePriority;
+    }
+    
     public int getTableStartTime() {
         return tableStartTime.get();
     }
