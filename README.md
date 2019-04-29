@@ -11,7 +11,7 @@ TASKS | PROGRESS
 GUI Skeleton | ✅
 Process Generation | ✅
 FCFS | ✅
-PRIORITY | ❌
+PRIORITY | ✅
 SJF | ❌
 SRTF | ❌
 RR | ✅
