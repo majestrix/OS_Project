@@ -113,6 +113,8 @@
                                     <Label text="RR" textFill="WHITE" />
                                     <Label text="Priority(N)" textFill="WHITE" />
                                     <Label text="Priority(P)" textFill="WHITE" />
+                                    <Label text="SJF" textFill="WHITE" />
+                                    <Label text="SRTF" textFill="WHITE" />
                                  </children>
                               </VBox>
                               <VBox layoutX="70.0" prefHeight="82.0" prefWidth="78.0">
@@ -121,6 +123,8 @@
                                     <Label fx:id="fRR" textFill="WHITE" />
                                     <Label fx:id="fPN" textFill="WHITE" />
                                     <Label fx:id="fPP" textFill="WHITE" />
+                                    <Label fx:id="fSJF" textFill="WHITE" />
+                                    <Label fx:id="fSRTF" textFill="WHITE" />
                                  </children>
                               </VBox>
                               <Label layoutX="70.0" layoutY="-20.0" text="FINISH" textFill="WHITE" />
@@ -130,6 +134,8 @@
                                     <Label fx:id="wRR" textFill="WHITE" />
                                     <Label fx:id="wPN" textFill="WHITE" />
                                     <Label fx:id="wPP" textFill="WHITE" />
+                                    <Label fx:id="wSJF" textFill="WHITE" />
+                                    <Label fx:id="wSRTF" textFill="WHITE" />
                                  </children>
                               </VBox>
                               <Label layoutX="140.0" layoutY="-20.0" text="WAIT" textFill="WHITE" />

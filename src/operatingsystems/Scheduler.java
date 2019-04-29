@@ -53,8 +53,17 @@ public class Scheduler {
         }
         return sum/Processes.size();
     }
+    public static int calcAverageFinish(){
+        int sum = 0;
+        int avg;
+        for(Process p: Processes)
+        {
+            sum += p.getFinishTime();
+        }
+        return sum/Processes.size();
+    }
     
-    public static void insertSorted(Process p,ArrayList<Process> arr){
+    public static void insertPriority(Process p,ArrayList<Process> arr){
         Comparator<Process> comp = Comparator.comparing(process -> process.getPriority());
         comp = comp.thenComparing(Comparator.comparing(process -> process.getArrivalTime()));
         int pos = Collections.binarySearch(arr,p,comp);
@@ -64,6 +73,16 @@ public class Scheduler {
         else
             arr.add(pos+1,p);
     } 
+    public static void insertShortestRemaining(Process p,ArrayList<Process> arr){
+        Comparator<Process> comp = Comparator.comparing(process -> process.getRemainingTimeCPU());
+        comp = comp.thenComparing(Comparator.comparing(process -> process.getArrivalTime()));
+        int pos = Collections.binarySearch(arr,p,comp);
+        if (pos < 0) {
+            arr.add(-pos-1, p);
+        }
+        else
+            arr.add(pos+1,p);
+    }     
     public static void FCFS(){
         int time = 0;
         int sum = 0;
@@ -245,10 +264,10 @@ public class Scheduler {
                 if (p.getArrivalTime() == time)
                 {
                     if( readyQueue.size() < MP)
-                        insertSorted(p,readyQueue);
+                        insertPriority(p,readyQueue);
                     else
                         if(!newQueue.contains(p))
-                            insertSorted(p,newQueue);
+                            insertPriority(p,newQueue);
                 } //Keep checking if we can add
             
             while(readyQueue.size() < MP && !newQueue.isEmpty())
@@ -321,15 +340,15 @@ public class Scheduler {
                 if (p.getArrivalTime() == time)
                 {
                     if( readyQueue.size() < MP)
-                        insertSorted(p,readyQueue);
+                        insertPriority(p,readyQueue);
                     else
                         if(!newQueue.contains(p))
-                            insertSorted(p,newQueue);
+                            insertPriority(p,newQueue);
                 } //Keep checking if we can add
             
             while(readyQueue.size() < MP && !newQueue.isEmpty())
             {
-                readyQueue.add(newQueue.remove(0));
+                insertPriority(newQueue.remove(0),readyQueue);
             }
             
             if(!waitQueue.isEmpty())
@@ -350,13 +369,10 @@ public class Scheduler {
             
             //Process queue preemptively
             if(!readyQueue.isEmpty() && curRunning != null && 
-               readyQueue.get(0).getPriority() > curRunning.getPriority())
+               readyQueue.get(0).getPriority() < curRunning.getPriority())
             {
-                Process temp = null;
-                temp = curRunning;
-                curRunning = readyQueue.remove(0);
-                insertSorted(temp,readyQueue);
-                temp = null;
+                insertPriority(curRunning, readyQueue);
+                curRunning = null;
             }
 
             if(curRunning == null) //if not working, start!
@@ -394,4 +410,180 @@ public class Scheduler {
             time++;
         }
     }
+    public static void SRTFbkup() {
+        int time = 0; // current time
+        Process curRunning = null; 
+        readyQueue = new ArrayList<Process>(); 
+        waitQueue = new ArrayList<Process>();
+        newQueue = new ArrayList<Process>();
+        
+        while(processesRunning()){
+            
+            for (Process p : Processes)
+                if (p.getArrivalTime() == time && readyQueue.size() < MP)
+                {
+                	if( readyQueue.size() < MP)
+                            
+                            insertShortestRemaining(p,readyQueue);
+                        else
+                            if(!newQueue.contains(p)){
+                                insertShortestRemaining(p,newQueue);
+                            }
+                } //Keep checking if we can add
+            
+            while(readyQueue.size() < MP && !newQueue.isEmpty())
+            {
+                insertShortestRemaining(newQueue.remove(0), readyQueue);
+            }
+            
+            if(!waitQueue.isEmpty())
+            {
+                Iterator<Process> iter = waitQueue.iterator();
+
+                while(iter.hasNext())
+                {
+                    Process p = iter.next();
+                    p.decIO();
+                    if(p.getRemainingTimeIO() <= 0)
+                    {
+                        insertShortestRemaining(p, readyQueue);
+                        iter.remove();
+                    }
+                }
+            }
+            
+            if(!readyQueue.isEmpty() && curRunning != null 
+               && readyQueue.get(0).getRemainingTimeCPU() > curRunning.getRemainingTimeCPU())
+            {
+                insertShortestRemaining(curRunning, readyQueue);
+                curRunning = null;
+            }
+
+            if (curRunning == null)
+            {
+                if(readyQueue.size() > 0)
+                    {
+                        curRunning = readyQueue.remove(0);
+                        if(curRunning.getStartTime() == -1)
+                            curRunning.setStartTime(time);
+                    }	
+            }
+
+                
+			
+            if (curRunning != null) 
+            { 
+                            //Work calculations!
+                            //First Check if process asks for IO!
+
+                if(curRunning.getReqIO() != -1 && curRunning.getRemainingTimeIO() > 0 &&
+                   curRunning.getReqIO()+curRunning.getRemainingTimeCPU() == curRunning.getCpuBurst())
+                    {
+                        waitQueue.add(curRunning);
+                        curRunning = null;
+                    }
+
+                else//If not, do the CPU math!
+                {
+                    curRunning.decCPU();             // decrement its remaining running time
+
+                    if(curRunning.getRemainingTimeCPU() == 0)
+                    {
+                        System.out.print("| P("+curRunning.getPid()+") | ");
+                        curRunning.setFinishTime(time);
+                        curRunning.setTurnAround(curRunning.getFinishTime() - curRunning.getStartTime());
+                        curRunning.setWaitingTime(curRunning.getTurnAround() - curRunning.getCpuBurst());
+                        curRunning = null;
+                    }                       
+                }
+            }
+		time++; // increment time	     	
+            }
+				
+	
+        }
+    public static void SRTF(){
+        int time = 0;
+        readyQueue = new ArrayList<Process>();
+        waitQueue = new ArrayList<Process>();
+        newQueue = new ArrayList<Process>();
+        Process curRunning = null;
+        resetProcs();
+
+        while(processesRunning()){
+
+            for (Process p : Processes)
+                if (p.getArrivalTime() == time)
+                {
+                    if( readyQueue.size() < MP)
+                        insertShortestRemaining(p,readyQueue);
+                    else
+                        if(!newQueue.contains(p))
+                            insertShortestRemaining(p,newQueue);
+                } //Keep checking if we can add
+            
+            while(readyQueue.size() < MP && !newQueue.isEmpty())
+            {
+                insertShortestRemaining(newQueue.remove(0),readyQueue);
+            }
+            
+            if(!waitQueue.isEmpty())
+            {
+                Iterator<Process> iter = waitQueue.iterator();
+
+                while(iter.hasNext())
+                {
+                    Process p = iter.next();
+                    p.decIO();
+                    if(p.getRemainingTimeIO() <= 0)
+                    {
+                        insertShortestRemaining(p, readyQueue);
+                        iter.remove();
+                    }
+                }
+            }
+
+            if(curRunning == null) //if not working, start!
+            {
+                if(readyQueue.size() > 0)
+                {
+                    curRunning = readyQueue.remove(0);
+                    if(curRunning.getStartTime() == -1)
+                        curRunning.setStartTime(time);
+                }
+            }
+
+            if(curRunning != null)
+            {//Work calculations!
+                //First Check if process asks for IO!
+                if(curRunning.getReqIO() != -1 && curRunning.getRemainingTimeIO() > 0 &&
+                        curRunning.getReqIO()+curRunning.getRemainingTimeCPU() == curRunning.getCpuBurst())
+                {
+                    waitQueue.add(curRunning);
+                    curRunning = null;
+                }
+                else
+                if(!readyQueue.isEmpty() &&
+                        readyQueue.get(0).getRemainingTimeCPU() < curRunning.getRemainingTimeCPU())
+                 {
+                     insertShortestRemaining(curRunning, readyQueue);
+                     curRunning = null;
+                 }
+                else//If not, do the CPU math!
+                {
+                    curRunning.decCPU();
+                    if(curRunning.getRemainingTimeCPU() == 0)
+                    {
+                        System.out.print("| P("+curRunning.getPid()+") | ");
+                        curRunning.setFinishTime(time+1);
+                        curRunning.setTurnAround(curRunning.getFinishTime() - curRunning.getStartTime());
+                        curRunning.setWaitingTime(curRunning.getTurnAround() - curRunning.getCpuBurst());
+                        curRunning = null;
+                    }
+                }
+            }
+            time++;
+        }
+    }
+
 }

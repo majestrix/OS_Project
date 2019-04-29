@@ -44,14 +44,15 @@ public class MainController implements Initializable {
     @FXML
     private JFXButton simButton;
     @FXML
-    private Label fFCFS,wFCFS,fRR,wRR,fPP,wPP,fPN,wPN;
+    private Label fFCFS,wFCFS,fRR,wRR,fPP,wPP,fPN,wPN,fSJF,wSJF,fSRTF,wSRTF;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ObservableList<String> options = FXCollections.observableArrayList("FCFS","RR","Priority(N)","Priority(P)");
+        ObservableList<String> options = FXCollections.observableArrayList("FCFS","RR",
+                                         "Priority(N)","Priority(P)","SJF","SRTF");
         selectAlgo.getItems().addAll(options);
     }    
 
@@ -59,6 +60,7 @@ public class MainController implements Initializable {
     private void Generate(ActionEvent event) {
         int procNumINT;
         int timeQuantumINT;
+        Scheduler.clear();
         try
         {
             if( procNum.getText() != null && timeQuantum.getText() != null)
@@ -117,12 +119,20 @@ public class MainController implements Initializable {
         //Find Averages
         Scheduler.FCFS();
         this.wFCFS.setText(Scheduler.calcAverageWait() + "");
+        this.fFCFS.setText(Scheduler.calcAverageFinish() + "");
         Scheduler.RR();
         this.wRR.setText(Scheduler.calcAverageWait() + "");
+        this.fRR.setText(Scheduler.calcAverageFinish() + "");
         Scheduler.PN();
         this.wPN.setText(Scheduler.calcAverageWait() + "");
+        this.fPN.setText(Scheduler.calcAverageFinish() + "");
         Scheduler.PP();
         this.wPP.setText(Scheduler.calcAverageWait() + "");
+        this.fPP.setText(Scheduler.calcAverageFinish() + "");
+        Scheduler.SRTF();
+        this.wSRTF.setText(Scheduler.calcAverageWait() + "");
+        this.fSRTF.setText(Scheduler.calcAverageFinish() + "");
+
         
         switch(option)
         {
@@ -141,6 +151,11 @@ public class MainController implements Initializable {
             case "Priority(P)":
                 System.out.println("Initiating Pre-emptive Priority!");
                 Scheduler.PP();
+                break;
+            case "SRTF":
+                System.out.println("Initiating ShortestRemainingTimeFirst!");
+                Scheduler.SRTF();
+                break;
             default:
                 simButton.setText("Select first!");
                 break;
