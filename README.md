@@ -12,7 +12,8 @@ GUI Skeleton | ✅
 Process Generation | ✅
 FCFS | ✅
 PRIORITY | ✅
-SJF | ❌
-SRTF | ❌
+SJF | ✅
+SRTF | ✅
 RR | ✅
-Proper GUI | ❌
+MP Button | ❌
+Context Switch | ❌
