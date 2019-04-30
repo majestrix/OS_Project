@@ -8,6 +8,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -50,16 +52,6 @@
                <children>
                   <VBox alignment="CENTER" layoutX="1.0" layoutY="35.0" prefHeight="200.0" prefWidth="279.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="230.0" text="Proccess Generator:" textAlignment="CENTER" textFill="WHITE">
-                           <font>
-                              <Font name="SansSerif Bold" size="21.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="procNum" promptText="Enter number of proccesses here">
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                        </TextField>
                         <TextField fx:id="timeQuantum" promptText="Time Quantum (Instructions per burst)">
                            <VBox.margin>
                               <Insets top="15.0" />
@@ -96,6 +88,11 @@
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding></VBox>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="230.0" text="Proccess Generator:" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="21.0" />
+                     </font>
+                  </Label>
                </children>
                <effect>
                   <DropShadow height="10.0" offsetY="3.5" radius="4.5" width="10.0" />
@@ -105,19 +102,9 @@
                <children>
                   <Pane layoutX="312.0" prefHeight="418.0" prefWidth="327.0">
                      <children>
-                        <Group layoutX="20.0" layoutY="103.0">
+                        <Group layoutX="-16.0" layoutY="97.0">
                            <children>
-                              <VBox prefHeight="82.0" prefWidth="78.0">
-                                 <children>
-                                    <Label text="FCFS" textFill="WHITE" />
-                                    <Label text="RR" textFill="WHITE" />
-                                    <Label text="Priority(N)" textFill="WHITE" />
-                                    <Label text="Priority(P)" textFill="WHITE" />
-                                    <Label text="SJF" textFill="WHITE" />
-                                    <Label text="SRTF" textFill="WHITE" />
-                                 </children>
-                              </VBox>
-                              <VBox layoutX="70.0" prefHeight="82.0" prefWidth="78.0">
+                              <VBox layoutX="70.0" prefHeight="106.0" prefWidth="68.0">
                                  <children>
                                     <Label fx:id="fFCFS" textFill="WHITE" />
                                     <Label fx:id="fRR" textFill="WHITE" />
@@ -127,8 +114,7 @@
                                     <Label fx:id="fSRTF" textFill="WHITE" />
                                  </children>
                               </VBox>
-                              <Label layoutX="70.0" layoutY="-20.0" text="FINISH" textFill="WHITE" />
-                              <VBox layoutX="140.0" prefHeight="82.0" prefWidth="78.0">
+                              <VBox layoutX="140.0" prefHeight="122.0" prefWidth="64.0">
                                  <children>
                                     <Label fx:id="wFCFS" textFill="WHITE" />
                                     <Label fx:id="wRR" textFill="WHITE" />
@@ -138,8 +124,10 @@
                                     <Label fx:id="wSRTF" textFill="WHITE" />
                                  </children>
                               </VBox>
-                              <Label layoutX="140.0" layoutY="-20.0" text="TA" textFill="WHITE" />
-                              <VBox layoutX="210.0" prefHeight="82.0" prefWidth="78.0">
+                              <Label layoutX="148.0" layoutY="-20.0" text="WAIT" textFill="WHITE" />
+                              <Label layoutX="210.0" layoutY="-20.0" text="Utilization" textFill="WHITE" />
+                              <Label layoutX="80.0" layoutY="-19.0" text="TA" textFill="WHITE" />
+                              <VBox layoutX="207.0" prefHeight="106.0" prefWidth="59.0">
                                  <children>
                                     <Label fx:id="utFCFS" textFill="WHITE" />
                                     <Label fx:id="utRR" textFill="WHITE" />
@@ -149,15 +137,62 @@
                                     <Label fx:id="utSRTF" textFill="WHITE" />
                                  </children>
                               </VBox>
-                              <Label layoutX="210.0" layoutY="-20.0" text="Utilization" textFill="WHITE" />
                            </children>
                         </Group>
+                        <VBox layoutX="261.0" layoutY="94.0" prefHeight="106.0" prefWidth="63.0">
+                           <children>
+                              <Label fx:id="utFCFS1" textFill="WHITE" />
+                              <Label fx:id="utRR1" textFill="WHITE" />
+                              <Label fx:id="utPN1" textFill="WHITE" />
+                              <Label fx:id="utPP1" textFill="WHITE" />
+                              <Label fx:id="utSJF1" textFill="WHITE" />
+                              <Label fx:id="utSRTF1" textFill="WHITE" />
+                           </children>
+                        </VBox>
+                        <ImageView fitHeight="173.0" fitWidth="248.0" layoutX="65.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@comp6.gif" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="72.0" layoutX="-22.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@gears.gif" />
+                           </image>
+                        </ImageView>
+                        <VBox layoutX="-18.0" layoutY="89.0" prefHeight="82.0" prefWidth="78.0">
+                           <children>
+                              <Label text="FCFS" textFill="WHITE" />
+                              <Label text="RR" textFill="WHITE" />
+                              <Label text="Priority(N)" textFill="WHITE" />
+                              <Label text="Priority(P)" textFill="WHITE" />
+                              <Label text="SJF" textFill="WHITE" />
+                              <Label text="SRTF" textFill="WHITE" />
+                           </children>
+                        </VBox>
+                        <Label layoutX="256.0" layoutY="75.0" text="-" textFill="WHITE" />
                      </children>
                      <effect>
                         <DropShadow height="10.0" offsetY="3.5" radius="4.5" width="10.0" />
                      </effect>
                   </Pane>
                   <Label fx:id="generateLabel" layoutY="85.0" textFill="WHITE" />
+                  <JFXButton fx:id="checkMP" layoutX="209.0" layoutY="42.0" maxWidth="130.0" minWidth="33.0" onAction="#MPtoValue" prefHeight="26.0" prefWidth="33.0" style="-fx-background-color: #4A569D;" text=" " textFill="#4a569d">
+                     <font>
+                        <Font name="SansSerif Regular" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fitHeight="19.0" fitWidth="21.0" layoutX="216.0" layoutY="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@check1.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="tfMP" layoutX="-11.0" layoutY="42.0" prefHeight="25.0" prefWidth="221.0" promptText="Enter degree of Multiprograming here" />
+                  <JFXButton fx:id="tenMP" layoutX="250.0" layoutY="42.0" maxWidth="130.0" minWidth="22.0" onAction="#MPisTen" prefHeight="28.0" prefWidth="31.0" style="-fx-background-color: #4A569D;" text="10" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Regular" size="12.0" />
+                     </font>
+                  </JFXButton>
+                  <TextField fx:id="procNum" layoutX="-11.0" layoutY="81.0" prefHeight="25.0" prefWidth="277.0" promptText="Enter number of proccesses here" />
                </children>
             </Group>
          </children>
