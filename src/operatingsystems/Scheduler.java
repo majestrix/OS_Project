@@ -33,6 +33,14 @@ public class Scheduler {
         Scheduler.Processes.clear();
         Process.ProcessNumber = 0;
     }
+
+    public static int getMP() {
+        return MP;
+    }
+
+    public static void setMP(int MP) {
+        Scheduler.MP = MP;
+    }
     
     public static void resetProcs(){
         cpuUt = 0;
@@ -256,9 +264,7 @@ public class Scheduler {
             }
             time++;
         }
-        for(Process p : Processes)
-            sum+= p.getWaitingTime();
-        System.out.println(sum/Processes.size());
+        
     }
     public static void PN(){
         int time = 0;
