@@ -34,7 +34,7 @@ import javafx.util.Pair;
 public class MainController implements Initializable {
 
     @FXML
-    private TextField procNum;
+    private TextField procNum,MP;
     @FXML
     private TextField timeQuantum;
     @FXML
@@ -106,17 +106,21 @@ public class MainController implements Initializable {
     @FXML
     private void simulateData() throws IOException{
         String option;
+        int intMP;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("procList.fxml"));
         loader.load();
         ProcListController cont = loader.getController();
         simButton.setText("Simulate");
+        
         try{
-          option = selectAlgo.getValue().toString();  
+          option = selectAlgo.getValue().toString();
+          intMP = Integer.parseInt(MP.getText());
         }catch(NullPointerException e)
         {
             option = "";
+            intMP = 10;
         }
-        
+        Scheduler.setMP(intMP);
         //Find Averages
         Scheduler.FCFS();
         this.wFCFS.setText(Scheduler.calcAverageWait() + "");
