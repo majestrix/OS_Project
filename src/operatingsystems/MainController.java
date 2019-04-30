@@ -44,7 +44,8 @@ public class MainController implements Initializable {
     @FXML
     private JFXButton simButton;
     @FXML
-    private Label fFCFS,wFCFS,fRR,wRR,fPP,wPP,fPN,wPN,fSJF,wSJF,fSRTF,wSRTF;
+    private Label fFCFS,wFCFS,fRR,wRR,fPP,wPP,fPN,wPN,fSJF,wSJF,fSRTF,wSRTF,
+                    utFCFS,utRR,utPP,utPN,utSJF,utSRTF;
     /**
      * Initializes the controller class.
      */
@@ -119,19 +120,28 @@ public class MainController implements Initializable {
         //Find Averages
         Scheduler.FCFS();
         this.wFCFS.setText(Scheduler.calcAverageWait() + "");
-        this.fFCFS.setText(Scheduler.calcAverageFinish() + "");
+        this.fFCFS.setText(Scheduler.calcAverageTurnAround() + "");
+        this.utFCFS.setText(Scheduler.getUt()+"%");
         Scheduler.RR();
         this.wRR.setText(Scheduler.calcAverageWait() + "");
-        this.fRR.setText(Scheduler.calcAverageFinish() + "");
+        this.fRR.setText(Scheduler.calcAverageTurnAround() + "");
+        this.utRR.setText(Scheduler.getUt()+"%");
         Scheduler.PN();
         this.wPN.setText(Scheduler.calcAverageWait() + "");
-        this.fPN.setText(Scheduler.calcAverageFinish() + "");
+        this.fPN.setText(Scheduler.calcAverageTurnAround() + "");
+        this.utPN.setText(Scheduler.getUt()+"%");
         Scheduler.PP();
         this.wPP.setText(Scheduler.calcAverageWait() + "");
-        this.fPP.setText(Scheduler.calcAverageFinish() + "");
+        this.fPP.setText(Scheduler.calcAverageTurnAround() + "");
+        this.utPP.setText(Scheduler.getUt() + "%");
+        Scheduler.SJF();
+        this.wSJF.setText(Scheduler.calcAverageWait() + "");
+        this.fSJF.setText(Scheduler.calcAverageTurnAround() + "");
+        this.utSJF.setText(Scheduler.getUt()+"%");
         Scheduler.SRTF();
         this.wSRTF.setText(Scheduler.calcAverageWait() + "");
-        this.fSRTF.setText(Scheduler.calcAverageFinish() + "");
+        this.fSRTF.setText(Scheduler.calcAverageTurnAround() + "");
+        this.utSRTF.setText(Scheduler.getUt()+"%");
 
         
         switch(option)
@@ -151,6 +161,10 @@ public class MainController implements Initializable {
             case "Priority(P)":
                 System.out.println("Initiating Pre-emptive Priority!");
                 Scheduler.PP();
+                break;
+            case "SJF":
+                System.out.println("Initiating ShortestRemainingTimeFirst!");
+                Scheduler.SJF();
                 break;
             case "SRTF":
                 System.out.println("Initiating ShortestRemainingTimeFirst!");

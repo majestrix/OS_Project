@@ -105,7 +105,7 @@
                <children>
                   <Pane layoutX="312.0" prefHeight="418.0" prefWidth="327.0">
                      <children>
-                        <Group layoutX="55.0" layoutY="104.0">
+                        <Group layoutX="20.0" layoutY="103.0">
                            <children>
                               <VBox prefHeight="82.0" prefWidth="78.0">
                                  <children>
@@ -138,7 +138,18 @@
                                     <Label fx:id="wSRTF" textFill="WHITE" />
                                  </children>
                               </VBox>
-                              <Label layoutX="140.0" layoutY="-20.0" text="WAIT" textFill="WHITE" />
+                              <Label layoutX="140.0" layoutY="-20.0" text="TA" textFill="WHITE" />
+                              <VBox layoutX="210.0" prefHeight="82.0" prefWidth="78.0">
+                                 <children>
+                                    <Label fx:id="utFCFS" textFill="WHITE" />
+                                    <Label fx:id="utRR" textFill="WHITE" />
+                                    <Label fx:id="utPN" textFill="WHITE" />
+                                    <Label fx:id="utPP" textFill="WHITE" />
+                                    <Label fx:id="utSJF" textFill="WHITE" />
+                                    <Label fx:id="utSRTF" textFill="WHITE" />
+                                 </children>
+                              </VBox>
+                              <Label layoutX="210.0" layoutY="-20.0" text="Utilization" textFill="WHITE" />
                            </children>
                         </Group>
                      </children>
