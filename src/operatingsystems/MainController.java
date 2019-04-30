@@ -46,6 +46,16 @@ public class MainController implements Initializable {
     @FXML
     private Label fFCFS,wFCFS,fRR,wRR,fPP,wPP,fPN,wPN,fSJF,wSJF,fSRTF,wSRTF,
                     utFCFS,utRR,utPP,utPN,utSJF,utSRTF;
+    @FXML
+    private JFXButton checkMP;
+
+    @FXML
+    private TextField tfMP;
+
+    @FXML
+    private JFXButton tenMP;
+    
+    static int MP;
     /**
      * Initializes the controller class.
      */
@@ -58,9 +68,35 @@ public class MainController implements Initializable {
     }    
 
     @FXML
+    void MPisTen(ActionEvent event) {
+        MP=10;
+    }
+
+    @FXML
+    void MPtoValue(ActionEvent event) {
+         try{
+         if( tfMP.getText() != null )
+            
+                MP= Integer.parseInt(tfMP.getText());
+            
+         else
+                         generateLabel.setText("Please enter provide input!");
+
+             } 
+         catch(NumberFormatException e)
+        {
+            generateLabel.setText("Please enter a valid number/s");
+        }
+    }
+    
+    
+    
+    
+    @FXML
     private void Generate(ActionEvent event) {
         int procNumINT;
         int timeQuantumINT;
+        
         Scheduler.clear();
         try
         {
@@ -68,6 +104,7 @@ public class MainController implements Initializable {
             {
                 procNumINT = Integer.parseInt(procNum.getText());
                 timeQuantumINT = Integer.parseInt(timeQuantum.getText());
+                
                 generateLabel.setText("OOP" + procNumINT);
                 for (int i = 0; i < procNumINT; i++) {
                     Process process = new Process(timeQuantumINT);
@@ -179,3 +216,7 @@ public class MainController implements Initializable {
     
     
 }
+
+
+
+
