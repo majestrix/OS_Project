@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
@@ -127,7 +128,7 @@
                                     <Label fx:id="fSRTF" textFill="WHITE" />
                                  </children>
                               </VBox>
-                              <Label layoutX="70.0" layoutY="-20.0" text="FINISH" textFill="WHITE" />
+                              <Label layoutX="70.0" layoutY="-20.0" text="TA" textFill="WHITE" />
                               <VBox layoutX="140.0" prefHeight="82.0" prefWidth="78.0">
                                  <children>
                                     <Label fx:id="wFCFS" textFill="WHITE" />
@@ -138,7 +139,7 @@
                                     <Label fx:id="wSRTF" textFill="WHITE" />
                                  </children>
                               </VBox>
-                              <Label layoutX="140.0" layoutY="-20.0" text="TA" textFill="WHITE" />
+                              <Label layoutX="140.0" layoutY="-20.0" text="WAIT" textFill="WHITE" />
                               <VBox layoutX="210.0" prefHeight="82.0" prefWidth="78.0">
                                  <children>
                                     <Label fx:id="utFCFS" textFill="WHITE" />
@@ -152,6 +153,7 @@
                               <Label layoutX="210.0" layoutY="-20.0" text="Utilization" textFill="WHITE" />
                            </children>
                         </Group>
+                        <TextArea layoutY="228.0" prefHeight="46.0" prefWidth="327.0" />
                      </children>
                      <effect>
                         <DropShadow height="10.0" offsetY="3.5" radius="4.5" width="10.0" />
