@@ -141,7 +141,7 @@
                               </VBox>
                            </children>
                         </Group>
-                        <VBox layoutX="261.0" layoutY="94.0" prefHeight="106.0" prefWidth="63.0">
+                        <VBox layoutX="260.0" layoutY="95.0" prefHeight="106.0" prefWidth="63.0">
                            <children>
                               <Label fx:id="utFCFS1" textFill="WHITE" />
                               <Label fx:id="utRR1" textFill="WHITE" />
@@ -161,7 +161,7 @@
                               <Image url="@gears.gif" />
                            </image>
                         </ImageView>
-                        <VBox layoutX="-18.0" layoutY="89.0" prefHeight="82.0" prefWidth="78.0">
+                        <VBox layoutX="-10.0" layoutY="95.0" prefHeight="82.0" prefWidth="78.0">
                            <children>
                               <Label text="FCFS" textFill="WHITE" />
                               <Label text="RR" textFill="WHITE" />

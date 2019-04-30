@@ -44,7 +44,7 @@ public class Process extends RecursiveTreeObject<Process> {
                     this.cpuInstrct = this.totalInstructions - this.ioInstrct;
                     this.cpuBurst = (int) Math.ceil((double)this.cpuInstrct/(double)quantum);
                     this.ioBurst = (int) Math.ceil((double)this.ioInstrct/(double)quantum);
-                    this.reqIO = (int) Math.abs(rand.nextInt(this.cpuBurst));
+                    this.reqIO = (int) Math.abs(rand.nextInt(this.cpuBurst)+1);
                 }
                 else
                 {

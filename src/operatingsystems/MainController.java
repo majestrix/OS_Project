@@ -122,7 +122,6 @@ public class MainController implements Initializable {
         loader.load();
         ProcListController cont = loader.getController();
         simButton.setText("Simulate");
-        
         try{
           option = selectAlgo.getValue().toString();
           intMP = Integer.parseInt(MP.getText());
@@ -131,7 +130,7 @@ public class MainController implements Initializable {
             option = "";
             intMP = 10;
         }
-        Scheduler.setMP(intMP);
+        
         //Find Averages
         Scheduler.FCFS();
         this.wFCFS.setText(Scheduler.calcAverageWait() + "");
@@ -190,6 +189,7 @@ public class MainController implements Initializable {
                 break;
         }
         cont.refreshTable();
+        simButton.setText("Updated Table!");
     }
     
     
