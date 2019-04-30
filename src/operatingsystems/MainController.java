@@ -46,6 +46,15 @@ public class MainController implements Initializable {
     @FXML
     private Label fFCFS,wFCFS,fRR,wRR,fPP,wPP,fPN,wPN,fSJF,wSJF,fSRTF,wSRTF,
                     utFCFS,utRR,utPP,utPN,utSJF,utSRTF;
+    @FXML
+    private JFXButton checkMP;
+
+    @FXML
+    private TextField tfMP;
+
+    @FXML
+    private JFXButton tenMP;
+    
     /**
      * Initializes the controller class.
      */
@@ -56,11 +65,12 @@ public class MainController implements Initializable {
                                          "Priority(N)","Priority(P)","SJF","SRTF");
         selectAlgo.getItems().addAll(options);
     }    
-
+    
     @FXML
     private void Generate(ActionEvent event) {
         int procNumINT;
         int timeQuantumINT;
+        
         Scheduler.clear();
         try
         {
@@ -68,6 +78,7 @@ public class MainController implements Initializable {
             {
                 procNumINT = Integer.parseInt(procNum.getText());
                 timeQuantumINT = Integer.parseInt(timeQuantum.getText());
+                
                 generateLabel.setText("OOP" + procNumINT);
                 for (int i = 0; i < procNumINT; i++) {
                     Process process = new Process(timeQuantumINT);
@@ -115,7 +126,7 @@ public class MainController implements Initializable {
         try{
           option = selectAlgo.getValue().toString();
           intMP = Integer.parseInt(MP.getText());
-        }catch(NullPointerException e)
+        }catch(Exception e)
         {
             option = "";
             intMP = 10;
@@ -183,3 +194,7 @@ public class MainController implements Initializable {
     
     
 }
+
+
+
+
