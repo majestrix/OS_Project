@@ -22,9 +22,10 @@ public class Scheduler {
     public static ArrayList<Process>  waitQueue;
     public static ArrayList<Process>  newQueue;
     public static int timeQuantum;
-    private static int MP = 10;
+    private static final int MP = MainController.MP;
     public static int cpuUt = 0;
     public static int ioUt = 0;
+    
     
     public void Scheduler(){
     }
@@ -702,3 +703,4 @@ public class Scheduler {
 	
         }
 }
+
