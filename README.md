@@ -1,6 +1,6 @@
 # OS_Project
 
-### BEFORE PROCCEEDING:
+### Important:
 * make sure u have **JAVA 12**
 * download and include [OpenJFX](https://openjfx.io/openjfx-docs/#install-javafx)
 * include **jfoenix** in ur library
@@ -15,5 +15,4 @@ PRIORITY | ✅
 SJF | ✅
 SRTF | ✅
 RR | ✅
-MP Button | ❌
-Context Switch | ❌
+MP Degree | ✅
