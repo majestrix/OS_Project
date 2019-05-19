@@ -25,6 +25,7 @@ public class Scheduler {
     private static int MP = 10;
     public static int cpuUt = 0;
     public static int ioUt = 0;
+    public static int tp=0;
     
     
     public void Scheduler(){
@@ -46,6 +47,7 @@ public class Scheduler {
     public static void resetProcs(){
         cpuUt = 0;
         ioUt = 0;
+        tp=0;
         for(Process p : Processes)
             p.resetProcess();
     }
@@ -77,6 +79,11 @@ public class Scheduler {
             sum += p.getTurnAround();
         }
         return sum/Processes.size();
+    }
+    
+    public static int getThroughput(){
+        return tp;
+        
     }
     
     public static void insertPriority(Process p,ArrayList<Process> arr){
@@ -171,6 +178,8 @@ public class Scheduler {
                         curRunning.setFinishTime(time+1);
                         curRunning.setTurnAround(curRunning.getFinishTime() - curRunning.getStartTime());
                         curRunning.setWaitingTime(curRunning.getTurnAround() - curRunning.getCpuBurst());
+                        if (curRunning.getFinishTime()<= 1000)
+                            tp+=1;
                         curRunning = null;
                     }
                 }
@@ -254,6 +263,8 @@ public class Scheduler {
                         curRunning.setFinishTime(time+1);
                         curRunning.setTurnAround(curRunning.getFinishTime() - curRunning.getStartTime());
                         curRunning.setWaitingTime(curRunning.getTurnAround() - curRunning.getCpuBurst());
+                        if (curRunning.getFinishTime()<= 1000)
+                            tp+=1;
                         curRunning = null;
                     }
                     else
@@ -338,6 +349,8 @@ public class Scheduler {
                         curRunning.setFinishTime(time+1);
                         curRunning.setTurnAround(curRunning.getFinishTime() - curRunning.getStartTime());
                         curRunning.setWaitingTime(curRunning.getTurnAround() - curRunning.getCpuBurst());
+                        if (curRunning.getFinishTime()<= 1000)
+                            tp+=1;
                         curRunning = null;
                     }
                 }
@@ -424,6 +437,8 @@ public class Scheduler {
                         curRunning.setFinishTime(time+1);
                         curRunning.setTurnAround(curRunning.getFinishTime() - curRunning.getStartTime());
                         curRunning.setWaitingTime(curRunning.getTurnAround() - curRunning.getCpuBurst());
+                        if (curRunning.getFinishTime()<= 1000)
+                            tp+=1;
                         curRunning = null;
                     }
                 }
@@ -502,6 +517,8 @@ public class Scheduler {
                         curRunning.setFinishTime(time+1);
                         curRunning.setTurnAround(curRunning.getFinishTime() - curRunning.getStartTime());
                         curRunning.setWaitingTime(curRunning.getTurnAround() - curRunning.getCpuBurst());
+                        if (curRunning.getFinishTime()<= 1000)
+                            tp+=1;
                         curRunning = null;
                     }
                 }
@@ -587,6 +604,8 @@ public class Scheduler {
                         curRunning.setFinishTime(time+1);
                         curRunning.setTurnAround(curRunning.getFinishTime() - curRunning.getStartTime());
                         curRunning.setWaitingTime(curRunning.getTurnAround() - curRunning.getCpuBurst());
+                        if (curRunning.getFinishTime()<= 1000)
+                            tp+=1;
                         curRunning = null;
                     }
                 }
@@ -694,6 +713,8 @@ public class Scheduler {
 			                        
 			    int shortestRemRunning = readyQueue.indexOf(curRunning); // find the index of the finished
 			    readyQueue.remove(shortestRemRunning); // remove the finished process from the readyQueue
+                            if (curRunning.getFinishTime()<= 1000)
+                            tp+=1;
 			    curRunning = null;
                         }
                         else
@@ -709,4 +730,8 @@ public class Scheduler {
 	
         }
 }
+
+
+
+
 
