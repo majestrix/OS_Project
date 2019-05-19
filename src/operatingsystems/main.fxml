@@ -143,12 +143,12 @@
                         </Group>
                         <VBox layoutX="260.0" layoutY="95.0" prefHeight="106.0" prefWidth="63.0">
                            <children>
-                              <Label fx:id="utFCFS1" textFill="WHITE" />
-                              <Label fx:id="utRR1" textFill="WHITE" />
-                              <Label fx:id="utPN1" textFill="WHITE" />
-                              <Label fx:id="utPP1" textFill="WHITE" />
-                              <Label fx:id="utSJF1" textFill="WHITE" />
-                              <Label fx:id="utSRTF1" textFill="WHITE" />
+                              <Label fx:id="tpFCFS" textFill="WHITE" />
+                              <Label fx:id="tpRR" textFill="WHITE" />
+                              <Label fx:id="tpPN" textFill="WHITE" />
+                              <Label fx:id="tpPP" textFill="WHITE" />
+                              <Label fx:id="tpSJF" textFill="WHITE" />
+                              <Label fx:id="tpSRTF" textFill="WHITE" />
                            </children>
                         </VBox>
                         <ImageView fitHeight="173.0" fitWidth="248.0" layoutX="65.0" layoutY="231.0" pickOnBounds="true" preserveRatio="true">
@@ -171,7 +171,7 @@
                               <Label text="SRTF" textFill="WHITE" />
                            </children>
                         </VBox>
-                        <Label layoutX="256.0" layoutY="75.0" text="-" textFill="WHITE" />
+                        <Label layoutX="256.0" layoutY="75.0" text="Throughput" textFill="WHITE" />
                      </children>
                      <effect>
                         <DropShadow height="10.0" offsetY="3.5" radius="4.5" width="10.0" />
