@@ -45,7 +45,7 @@ public class MainController implements Initializable {
     private JFXButton simButton;
     @FXML
     private Label fFCFS,wFCFS,fRR,wRR,fPP,wPP,fPN,wPN,fSJF,wSJF,fSRTF,wSRTF,
-                    utFCFS,utRR,utPP,utPN,utSJF,utSRTF;
+                    utFCFS,utRR,utPP,utPN,utSJF,utSRTF,tpFCFS,tpRR,tpPP,tpPN,tpSJF,tpSRTF;
     @FXML
     private JFXButton checkMP;
 
@@ -136,26 +136,36 @@ public class MainController implements Initializable {
         this.wFCFS.setText(Scheduler.calcAverageWait() + "");
         this.fFCFS.setText(Scheduler.calcAverageTurnAround() + "");
         this.utFCFS.setText(Scheduler.getUt()+"%");
+        this.tpFCFS.setText(Scheduler.getThroughput()+ "");
         Scheduler.RR();
         this.wRR.setText(Scheduler.calcAverageWait() + "");
         this.fRR.setText(Scheduler.calcAverageTurnAround() + "");
         this.utRR.setText(Scheduler.getUt()+"%");
+        this.tpRR.setText(Scheduler.getThroughput()+ "");
         Scheduler.PN();
         this.wPN.setText(Scheduler.calcAverageWait() + "");
         this.fPN.setText(Scheduler.calcAverageTurnAround() + "");
         this.utPN.setText(Scheduler.getUt()+"%");
+        this.tpPN.setText(Scheduler.getThroughput()+ "");
+
         Scheduler.PP();
         this.wPP.setText(Scheduler.calcAverageWait() + "");
         this.fPP.setText(Scheduler.calcAverageTurnAround() + "");
         this.utPP.setText(Scheduler.getUt() + "%");
+        this.tpPP.setText(Scheduler.getThroughput()+ "");
+
         Scheduler.SJF();
         this.wSJF.setText(Scheduler.calcAverageWait() + "");
         this.fSJF.setText(Scheduler.calcAverageTurnAround() + "");
         this.utSJF.setText(Scheduler.getUt()+"%");
+        this.tpSJF.setText(Scheduler.getThroughput()+ "");
+
         Scheduler.SRTF();
         this.wSRTF.setText(Scheduler.calcAverageWait() + "");
         this.fSRTF.setText(Scheduler.calcAverageTurnAround() + "");
         this.utSRTF.setText(Scheduler.getUt()+"%");
+        this.tpSRTF.setText(Scheduler.getThroughput()+ "");
+        
 
         
         switch(option)
@@ -194,6 +204,8 @@ public class MainController implements Initializable {
     
     
 }
+
+
 
 
 
