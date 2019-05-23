@@ -62,8 +62,8 @@ public class Scheduler {
             return false;
     }
     
-    public static int calcAverageWait(){
-        int sum = 0;
+    public static float calcAverageWait(){
+        float sum = 0;
         int avg;
         for(Process p: Processes)
         {
@@ -71,8 +71,8 @@ public class Scheduler {
         }
         return sum/Processes.size();
     }
-    public static int calcAverageTurnAround(){
-        int sum = 0;
+    public static float calcAverageTurnAround(){
+        float sum = 0;
         int avg;
         for(Process p: Processes)
         {
@@ -730,6 +730,8 @@ public class Scheduler {
 	
         }
 }
+
+
 
 
 
