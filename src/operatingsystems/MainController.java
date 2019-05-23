@@ -125,6 +125,7 @@ public class MainController implements Initializable {
         try{
           option = selectAlgo.getValue().toString();
           intMP = Integer.parseInt(MP.getText());
+          Scheduler.setMP(intMP);
         }catch(Exception e)
         {
             option = "";
@@ -204,6 +205,7 @@ public class MainController implements Initializable {
     
     
 }
+
 
 
 
